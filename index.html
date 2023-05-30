@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="app.css"/>
+</head>
+<body>
+<div class="page">
+    <p>Keer op keer!</p>
+    <div class="game-option">
+        <input type="checkbox" id="solitary_mode" name="solitary_mode"/>
+        <label for="solitary_mode">Ik speel alleen</label>
+    </div>
+    <div class="game-option">
+        <input type="checkbox" id="extra_die" name="extra_die"/>
+        <label for="extra_die">Extra dobbelsteen</label>
+    </div>
+    <button onClick="throw_dice();">Gooien</button>
+    <button onClick="reset_result();">Opnieuw!</button>
+    <ol class="result">
+    </ol>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="app.js?code=1"></script>
+</body>
+</html>
