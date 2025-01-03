@@ -40,54 +40,54 @@
 }
 
 .one-die {
-    background-image: url("/src/img/img/dice/Uno.svg");
+    background-image: url("/img/dice/Uno.svg");
 }
 .two-die {
-    background-image: url("/src/img/img/dice/Dos.svg");
+    background-image: url("/img/dice/Dos.svg");
 }
 .three-die {
-    background-image: url("/src/img/img/dice/Tres.svg");
+    background-image: url("/img/dice/Tres.svg");
 }
 .four-die {
-    background-image: url("/src/img/img/dice/Cuatro.svg");
+    background-image: url("/img/dice/Cuatro.svg");
 }
 .five-die {
-    background-image: url("/src/img/img/dice/Cinco.svg");
+    background-image: url("/img/dice/Cinco.svg");
 }
 .black-die {
-    background-image: url("/src/img/img/dice/Cross.svg?v=2");
+    background-image: url("/img/dice/Cross.svg?v=2");
 }
 .question-die {
-    background-image: url("/src/img/img/dice/Pregunta.svg?v=1");
+    background-image: url("/img/dice/Pregunta.svg?v=1");
 }
 .bomb-die {
-    background-image: url("/src/img/img/dice/Bomb.svg");
+    background-image: url("/img/dice/Bomb.svg");
 }
 .stars-die {
-    background-image: url("/src/img/img/dice/Stars.svg");
+    background-image: url("/img/dice/Stars.svg");
 }
 .three-on-a-line-die {
-    background-image: url("/src/img/img/dice/One-row.svg");
+    background-image: url("/img/dice/One-row.svg");
 }
 .all-of-one-colour-die {
-    background-image: url("/src/img/img/dice/One-color.svg");
+    background-image: url("/img/dice/One-color.svg");
 }
 .heart-die {
-    background-image: url("/src/img/img/dice/Heart.svg");
+    background-image: url("/img/dice/Heart.svg");
 }
 
 .yellow-die {
-    background-image: url("/src/img/img/dice/Yellow.svg");
+    background-image: url("/img/dice/Yellow.svg");
 }
 .red-die {
-    background-image: url("/src/img/img/dice/Red.svg");
+    background-image: url("/img/dice/Red.svg");
 }
 .blue-die {
-    background-image: url("/src/img/img/dice/Blue.svg");
+    background-image: url("/img/dice/Blue.svg");
 }
 .green-die {
-    background-image: url("/src/img/img/dice/Green.svg");
+    background-image: url("/img/dice/Green.svg");
 }
 .orange-die {
-    background-image: url("/src/img/img/dice/Orange.svg");
+    background-image: url("/img/dice/Orange.svg");
 }
