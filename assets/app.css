@@ -1,0 +1,93 @@
+.result {
+    padding: 0;
+}
+
+.result-item {
+    display: flex;
+}
+
+.result-item .count {
+    line-height: 2em;
+    width: 40px;
+}
+
+.result-dice {
+    display: flex;
+}
+
+.result-dice .die {
+    border-radius: 5px;
+    line-height: 30px;
+    width: 36px;
+    border: 3px solid #AAA;
+    margin: 0 .5rem .5rem 0;
+
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.result-dice .number-die {
+    background-color: #FBFBFB;
+}
+
+.result-dice .colour-die {
+    background-color: #333333;
+}
+
+.result-dice .special-die {
+    background-color: #c2b280;
+}
+
+.one-die {
+    background-image: url("/img/dice/Uno.svg");
+}
+.two-die {
+    background-image: url("/img/dice/Dos.svg");
+}
+.three-die {
+    background-image: url("/img/dice/Tres.svg");
+}
+.four-die {
+    background-image: url("/img/dice/Cuatro.svg");
+}
+.five-die {
+    background-image: url("/img/dice/Cinco.svg");
+}
+.black-die {
+    background-image: url("/img/dice/Cross.svg?v=2");
+}
+.question-die {
+    background-image: url("/img/dice/Pregunta.svg?v=1");
+}
+.bomb-die {
+    background-image: url("/img/dice/Bomb.svg");
+}
+.stars-die {
+    background-image: url("/img/dice/Stars.svg");
+}
+.three-on-a-line-die {
+    background-image: url("/img/dice/One-row.svg");
+}
+.all-of-one-colour-die {
+    background-image: url("/img/dice/One-color.svg");
+}
+.heart-die {
+    background-image: url("/img/dice/Heart.svg");
+}
+
+.yellow-die {
+    background-image: url("/img/dice/Yellow.svg");
+}
+.red-die {
+    background-image: url("/img/dice/Red.svg");
+}
+.blue-die {
+    background-image: url("/img/dice/Blue.svg");
+}
+.green-die {
+    background-image: url("/img/dice/Green.svg");
+}
+.orange-die {
+    background-image: url("/img/dice/Orange.svg");
+}

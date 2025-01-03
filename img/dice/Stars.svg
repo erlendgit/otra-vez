@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Stars</title>
+    <g id="Stars" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon id="Star" fill="#000000" points="10.5 13.75 6.67939586 15.7586105 7.40906632 11.5043052 4.31813264 8.49138954 8.58969793 7.87069477 10.5 4 12.4103021 7.87069477 16.6818674 8.49138954 13.5909337 11.5043052 14.3206041 15.7586105"></polygon>
+        <polygon id="Star" fill="#000000" points="19.5 23.75 15.6793959 25.7586105 16.4090663 21.5043052 13.3181326 18.4913895 17.5896979 17.8706948 19.5 14 21.4103021 17.8706948 25.6818674 18.4913895 22.5909337 21.5043052 23.3206041 25.7586105"></polygon>
+    </g>
+</svg>

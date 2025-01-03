@@ -13,11 +13,24 @@ let reset_result = null;
         if ($('#extra_die').prop('checked')) {
             dice = [...dice, random_extra_die()]
         }
+        const count = $('.result li').length + 1;
         let current_items = $('.result').html()
-        $('.result').html('<li><div class="result-dice">' + dice.join('') + '</div></li>' + current_items)
+        let template = $("#dice_template").html();
+        template = template.replace("{{dice}}", dice.join(''));
+        template = template.replace("{{count}}", count);
+        $('.result').html(template + current_items)
+
+        if ($('#solitary_mode').prop('checked') && count >= 30) {
+            const tooMuchMessage = $("#too_much_template").html();
+            $("#too_much_placeholder").html(tooMuchMessage);
+            $('#roll_dice_button').prop('disabled', true);
+
+        }
     }
     reset_result = () => {
         $('.result').html("");
+        $('#too_much_placeholder').html("");
+        $('#roll_dice_button').prop('disabled', false);
         throw_dice();
     }
 

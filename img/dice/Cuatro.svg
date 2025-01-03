@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Cuatro</title>
+    <g id="Cuatro" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle fill="#000000" cx="23" cy="23" r="3"></circle>
+        <circle id="Tres" fill="#000000" cx="7" cy="23" r="3"></circle>
+        <circle id="Dos" fill="#000000" cx="23" cy="7" r="3"></circle>
+        <circle id="Uno" fill="#000000" cx="7" cy="7" r="3"></circle>
+    </g>
+</svg>
