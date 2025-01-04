@@ -48,8 +48,6 @@ function PlayOnceMore() {
         });
     }
 
-    // TODO: na het toevoegen van canThrowDice() doet ie het niet meer...
-
     this.stop = () => {
         let status = this.getStatus();
         status.isStarted = false;
