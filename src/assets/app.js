@@ -1,74 +1,163 @@
-let throw_dice = null;
-let reset_result = null;
+function Storage(key, defaultValue) {
+    function read() {
+        try {
+            const item = window.localStorage.getItem(key);
+            if (item === null) {
+                return defaultValue;
+            }
+            return JSON.parse(item);
+        } catch (e) {
+            return defaultValue;
+        }
+    }
+
+    function write(value) {
+        window.localStorage.setItem(key, JSON.stringify(value))
+    }
+
+    return {read, write}
+}
+
+function choose(options) {
+    return options[Math.floor(Math.random() * options.length)];
+}
+
+function PlayOnceMore() {
+    this.status = new Storage("status", {
+        rows: [],
+        isSolitude: false,
+        withSpecialDie: false,
+        isStarted: false,
+    });
+
+    this.getStatus = () => this.status.read();
+    this.updateStatus = (status) => this.status.write(status);
+
+    this.isStarted = () => this.getStatus().isStarted;
+    this.rows = () => this.getStatus().rows;
+    this.isSolitude = () => this.getStatus().isSolitude;
+    this.withSpecialDie = () => this.getStatus().withSpecialDie;
+    this.canThrowDice = () => !this.isSolitude() || this.rows().length < 30;
+
+    this.start = ({isSolitude, withSpecialDie}) => {
+        this.updateStatus({
+            rows: [randomDies(withSpecialDie)],
+            isStarted: true,
+            isSolitude,
+            withSpecialDie,
+        });
+    }
+
+    // TODO: na het toevoegen van canThrowDice() doet ie het niet meer...
+
+    this.stop = () => {
+        let status = this.getStatus();
+        status.isStarted = false;
+        status.rows = [];
+        this.updateStatus(status);
+    }
+
+    this.throwDice = () => {
+        let status = this.getStatus();
+        if (this.canThrowDice()) {
+            status.rows = [randomDies(status.withSpecialDie), ...status.rows];
+            this.updateStatus(status);
+        }
+    }
+
+    function randomDies(withSpecialDie) {
+        return [
+            randomNumber(),
+            randomNumber(),
+            randomNumber(),
+            randomColour(),
+            randomColour(),
+            randomColour(),
+            ...(withSpecialDie ? [randomSpecialDie()] : []),
+        ];
+    }
+
+    function randomNumber() {
+        return choose(["d1", "d2", "d3", "d4", "d5", "d6"]);
+    }
+
+    function randomColour() {
+        return choose(["c1", "c2", "c3", "c4", "c5", "c6"]);
+    }
+
+    function randomSpecialDie() {
+        return choose(["s1", "s2", "s3", "s4", "s5", "s5"]);
+    }
+}
 
 (function () {
-    throw_dice = () => {
-        let dice = [
-            random_number(),
-            random_number(),
-            random_number(),
-            random_colour(),
-            random_colour(),
-            random_colour()];
-        if ($('#extra_die').prop('checked')) {
-            dice = [...dice, random_extra_die()]
-        }
-        const count = $('.result li').length + 1;
-        let current_items = $('.result').html()
-        let template = $("#dice_template").html();
-        template = template.replace("{{dice}}", dice.join(''));
-        template = template.replace("{{count}}", count);
-        $('.result').html(template + current_items)
+    let theGame = new PlayOnceMore();
 
-        if ($('#solitary_mode').prop('checked') && count >= 30) {
-            const tooMuchMessage = $("#too_much_template").html();
-            $("#too_much_placeholder").html(tooMuchMessage);
-            $('#roll_dice_button').prop('disabled', true);
-
+    $.fn.visibleIf = function (condition) {
+        if (condition) {
+            $(this).removeClass("d-none")
+        } else {
+            $(this).addClass("d-none")
         }
     }
-    reset_result = () => {
-        $('.result').html("");
-        $('#too_much_placeholder').html("");
-        $('#roll_dice_button').prop('disabled', false);
-        throw_dice();
+
+    $.fn.copyStatusFrom = function (condition) {
+        $(this).prop("checked", !!condition);
     }
 
-    function random_number() {
-        let options = [
-            "<div class='die number-die one-die'>1</div>",
-            "<div class='die number-die two-die'>2</div>",
-            "<div class='die number-die three-die'>3</div>",
-            "<div class='die number-die four-die'>4</div>",
-            "<div class='die number-die five-die'>5</div>",
-            "<div class='die number-die question-die'>?</div>",
-        ]
-        return _.sample(options);
+    $.fn.freezeIf = function (condition) {
+        $(this).prop("disabled", !!condition);
     }
 
-    function random_colour() {
-        let options = [
-            "<div class='die colour-die green-die'>Groen</div>",
-            "<div class='die colour-die yellow-die'>Geel</div>",
-            "<div class='die colour-die blue-die'>Blauw</div>",
-            "<div class='die colour-die red-die'>Rood</div>",
-            "<div class='die colour-die orange-die'>Oranje</div>",
-            "<div class='die colour-die black-die'>Zwart</div>",
-        ]
-        return _.sample(options);
+    function rowHtml(dies, index) {
+        let html = $("#template_row").html();
+        html = html.replace("{{dice}}", dies.map(die => dieHtml(die)).join(""));
+        html = html.replace("{{count}}", index);
+        return html;
     }
 
-    function random_extra_die() {
-        let options = [
-            "<div class='die special-die bomb-die'>Bom</div>",
-            "<div class='die special-die stars-die'>2 sterren</div>",
-            "<div class='die special-die three-on-a-line-die'>3 op 1 regel</div>",
-            "<div class='die special-die all-of-one-colour-die'>1 kleur</div>",
-            "<div class='die special-die heart-die'>Hart</div>",
-            "<div class='die special-die heart-die'>Hart</div>",
-        ]
-        return _.sample(options);
+    function dieHtml(die) {
+        return $(`#template_die_${die}`).html();
     }
 
-    throw_dice();
+    function refreshScreen() {
+        const rows = theGame.rows();
+        const count = rows.length;
+
+        $(".start-game-button-group").visibleIf(!theGame.isStarted());
+        $(".game-control-form").visibleIf(theGame.isStarted());
+
+        $("#solitary_mode").copyStatusFrom(theGame.isSolitude());
+        $("#solitary_mode").freezeIf(theGame.isStarted());
+        $("#extra_die").copyStatusFrom(theGame.withSpecialDie());
+        $("#extra_die").freezeIf(theGame.isStarted());
+
+        $("#throw_dice").freezeIf(!theGame.canThrowDice());
+        $("#end_of_game").visibleIf(!theGame.canThrowDice() && theGame.isStarted());
+
+        $("#result").html(rows.map(
+            (dies, index) => rowHtml(dies, count - index)
+        ).join(""));
+    }
+
+    $("#start_game").click(() => {
+        const isSolitude = $("#solitary_mode").prop("checked");
+        const withSpecialDie = $("#extra_die").prop("checked");
+        theGame.start({isSolitude, withSpecialDie});
+        refreshScreen();
+    });
+
+    $("#stop_game").click(() => {
+        if (confirm("Weet je het zeker?")) {
+            theGame.stop();
+            refreshScreen();
+        }
+    });
+
+    $("#throw_dice").click(() => {
+        theGame.throwDice();
+        refreshScreen();
+    });
+
+    refreshScreen();
 })();

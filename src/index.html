@@ -2,7 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/app.css?code=16"/>
+    <link rel="stylesheet" type="text/css" href="/assets/app.css?code=17"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -16,39 +16,97 @@
     </header>
     <main class="container">
         <div class="row">
-            <div class="col my-3">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="solitary_mode" name="solitary_mode"/>
-                    <label for="solitary_mode">Ik speel alleen</label>
+            <div class="col my-3" id="game_control">
+                <div class="game-init-form">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="solitary_mode" name="solitary_mode"/>
+                        <label for="solitary_mode">Ik speel alleen</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="extra_die" name="extra_die"/>
+                        <label for="extra_die">Extra dobbelsteen</label>
+                    </div>
+                    <div class="form-group my-3 start-game-button-group">
+                        <button class="btn btn-info btn-lg mx-1" id="start_game">Start het spel</button>
+                    </div>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="extra_die" name="extra_die"/>
-                    <label for="extra_die">Extra dobbelsteen</label>
-                </div>
-                <div class="form-group my-3">
-                    <button class="btn btn-info mx-1" onClick="throw_dice();" id="roll_dice_button">Gooien</button>
-                    <button class="btn btn-warning mx-1" onClick="reset_result();">Opnieuw!</button>
+                <div class="game-control-form  my-3 d-flex d-none">
+                    <div class="form-group order-1 mx-3">
+                        <button class="btn btn-success mx-1" id="throw_dice">Nieuwe ronde</button>
+                    </div>
+                    <div class="form-group order-0">
+                        <button class="btn btn-danger btn-sm mx-1" id="stop_game">Opnieuw<br>beginnen!</button>
+                    </div>
                 </div>
                 <div id="too_much_placeholder"></div>
-                <ol class="result">
+                <div id="end_of_game" class="d-none my-3">
+                    <h2 class="text-danger">Het spel is afgelopen!</h2>
+                </div>
+                <ol id="result" class="m-0 p-0">
                 </ol>
             </div>
         </div>
     </main>
+    <template id="template_row">
+        <li class="result-item my-2">
+            <div class="count">{{count}}</div>
+            <div class="result-dice">{{dice}}</div>
+        </li>
+    </template>
+    <template id="template_die_d1">
+        <div class='die number-die one-die'>1</div>
+    </template>
+    <template id="template_die_d2">
+        <div class='die number-die two-die'>2</div>
+    </template>
+    <template id="template_die_d3">
+        <div class='die number-die three-die'>3</div>
+    </template>
+    <template id="template_die_d4">
+        <div class='die number-die four-die'>4</div>
+    </template>
+    <template id="template_die_d5">
+        <div class='die number-die five-die'>5</div>
+    </template>
+    <template id="template_die_d6">
+        <div class='die number-die six-die'>Elk aantal</div>
+    </template>
+    <template id="template_die_c1">
+        <div class='die colour-die green-die'>Groen</div>
+    </template>
+    <template id="template_die_c2">
+        <div class='die colour-die yellow-die'>Geel</div>
+    </template>
+    <template id="template_die_c3">
+        <div class='die colour-die red-die'>Rood</div>
+    </template>
+    <template id="template_die_c4">
+        <div class='die colour-die blue-die'>Blauw</div>
+    </template>
+    <template id="template_die_c5">
+        <div class='die colour-die orange-die'>Oranje</div>
+    </template>
+    <template id="template_die_c6">
+        <div class='die colour-die black-die'>Elke kleur</div>
+    </template>
+    <template id="template_die_s1">
+        <div class='die special-die bomb-die'>Bom</div>
+    </template>
+    <template id="template_die_s2">
+        <div class='die special-die stars-die'>Bom</div>
+    </template>
+    <template id="template_die_s3">
+        <div class='die special-die three-on-a-line-die'>Bom</div>
+    </template>
+    <template id="template_die_s4">
+        <div class='die special-die all-of-one-colour-die'>Bom</div>
+    </template>
+    <template id="template_die_s5">
+        <div class='die special-die heart-die'>Bom</div>
+    </template>
 </div>
-<template id="dice_template">
-    <li class="result-item my-2">
-        <div class="count px-2">{{count}}</div>
-        <div class="result-dice">{{dice}}</div>
-    </li>
-</template>
-<template id="too_much_template">
-    <h3 class="text-warning my-2">Dit was de laatste worp!</h3>
-</template>
-
-<script src="/assets/bootstrap/js/bootstrap-bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+<script src="/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-<script src="/assets/app.js?code=4"></script>
+<script src="/assets/app.js?code=5"></script>
 </body>
 </html>

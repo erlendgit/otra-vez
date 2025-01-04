@@ -55,10 +55,10 @@
     background-image: url("/img/dice/Cinco.svg");
 }
 .black-die {
-    background-image: url("/img/dice/Cross.svg?v=2");
+    background-image: none;
 }
 .question-die {
-    background-image: url("/img/dice/Pregunta.svg?v=1");
+    background-image: none;
 }
 .bomb-die {
     background-image: url("/img/dice/Bomb.svg");
